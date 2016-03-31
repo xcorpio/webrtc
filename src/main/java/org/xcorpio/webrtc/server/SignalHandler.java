@@ -10,8 +10,9 @@ import org.slf4j.LoggerFactory;
 
 public class SignalHandler extends WebSocketServer {
 
-    Logger logger = LoggerFactory.getLogger(SignalHandler.class);
-    
+    private static Logger logger = LoggerFactory.getLogger(SignalHandler.class);
+    private RoomManager roomManager = new RoomManager();
+
     public SignalHandler(int port) {
         super(new InetSocketAddress(port));
     }
@@ -28,12 +29,13 @@ public class SignalHandler extends WebSocketServer {
     @Override
     public void onClose(WebSocket conn, int code, String reason, boolean remote) {
         logger.info("onClose: {}", conn.hashCode());
+        roomManager.removeSocket(conn);
     }
 
     @Override
     public void onMessage(WebSocket conn, String message) {
         logger.info("onMessage: {}", message);
-        RoomManager.eventDispatch(conn, message);
+        roomManager.eventDispatch(conn, message);
     }
 
     @Override
