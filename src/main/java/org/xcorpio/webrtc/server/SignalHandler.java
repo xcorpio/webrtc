@@ -40,7 +40,7 @@ public class SignalHandler extends WebSocketServer {
 
     @Override
     public void onError(WebSocket conn, Exception ex) {
-        logger.info("onError: ", ex.getMessage());
+        logger.info("WebSocketServer onError: {} client {}", roomManager.getSocketClientMap().get(conn).getId(), ex);
     }
 
     public static void main(String[] args) {

@@ -188,4 +188,8 @@ public class RoomManager {
             logger.info("{} leaves the room {}, broadcast: {}.", clientId, roomId, message);
         }
     }
+
+    public Map<WebSocket, Client> getSocketClientMap() {
+        return socketClientMap;
+    }
 }
