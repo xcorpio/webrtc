@@ -27,6 +27,12 @@
 			expression="org.springframework.stereotype.Service" />
 	</context:component-scan>
 
+	<bean class="org.xcorpio.webrtc.server.SignalHandler" init-method="start"
+		destroy-method="stop">
+		<constructor-arg> 
+			<value>8888</value>
+		</constructor-arg>
+	</bean>
 	<task:annotation-driven />
 	<import resource="spring-mvc.xml" />
 	<import resource="spring-websocket.xml" />
